@@ -1,7 +1,27 @@
 <script setup lang="ts">
+import { useModal } from './composables/modal'
+
+const { show, hideModal } = useModal()
 </script>
 
 <template>
+  <div
+    class="modal"
+    :class="{ 'is-active': show }"
+  >
+    <div class="modal-background" />
+    <div class="modal-content">
+      <div id="modal">
+        <!-- content here -->
+      </div>
+    </div>
+    <button
+      class="modal-close is-large"
+      aria-label="close"
+      @click="hideModal"
+    />
+  </div>
+
   <div class="section">
     <div class="container">
       <Navbar />
