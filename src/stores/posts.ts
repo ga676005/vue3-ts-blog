@@ -52,29 +52,48 @@ export const usePosts = defineStore('posts', {
     },
 
     async fetchPosts() {
-      const res = await fetch('http://localhost:8000/posts')
-      const data = (await res.json()) as Post[]
-      await delay()
+      try {
+        const res = await fetch('/api/posts', {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        console.log(res)
+        const data = (await res.json()) as Post[]
+        await delay()
 
-      const ids: string[] = []
-      const all = new Map<string, Post>()
-      for (const post of data) {
-        ids.push(post.id)
-        all.set(post.id, post)
+        const ids: string[] = []
+        const all = new Map<string, Post>()
+        for (const post of data) {
+          ids.push(post.id)
+          all.set(post.id, post)
+        }
+
+        this.ids = ids
+        this.all = all
       }
-
-      this.ids = ids
-      this.all = all
+      catch (err) {
+        console.error('fetchPosts', err)
+      }
     },
 
-    createPost(post: TimelinePost) {
-      const body = JSON.stringify({
-        ...post,
-        created: post.created.toISO(),
-      })
+    createPost(post: Post) {
+      const body = JSON.stringify(post)
 
-      return window.fetch('http://localhost:8000/posts', {
+      return window.fetch('/api/posts', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body,
+      })
+    },
+
+    updatePost(post: Post) {
+      const body = JSON.stringify(post)
+
+      return window.fetch('/api/posts', {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },

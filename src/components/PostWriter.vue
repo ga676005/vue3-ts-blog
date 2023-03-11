@@ -3,13 +3,19 @@ import { marked } from 'marked'
 import highlightjs from 'highlight.js'
 import { debounce } from 'lodash'
 import { usePosts } from '@stores/posts'
-import type { TimelinePost } from '@/posts'
+import { useUsers } from '@stores/users'
+import type { Post, TimelinePost } from '@/posts'
 const props = defineProps<{
-  post: TimelinePost
+  post: TimelinePost | Post
+}>()
+
+const emit = defineEmits<{
+  (event: 'submit', post: Post): void
 }>()
 
 const posts = usePosts()
 const router = useRouter()
+const userStore = useUsers()
 
 const title = ref(props.post.title)
 const content = ref(props.post.markdown)
@@ -55,14 +61,22 @@ function handleInput() {
 }
 
 async function handleClick() {
-  const newPost: TimelinePost = {
+  if (!userStore.currentUserId)
+    throw new Error('User was not found')
+
+  const created = typeof props.post.created === 'string'
+    ? props.post.created
+    : props.post.created.toISO()
+
+  const newPost: Post = {
     ...props.post,
+    created,
     title: title.value,
     markdown: content.value,
     html: html.value,
+    authorId: userStore.currentUserId,
   }
-  await posts.createPost(newPost)
-  router.push('/')
+  emit('submit', newPost)
 }
 </script>
 
@@ -79,14 +93,14 @@ async function handleClick() {
   </div>
 
   <div class="columns">
-    <div class="column">
+    <div class="column card">
       <div
         ref="contentEditable"
         contenteditable
         @input="handleInput"
       />
     </div>
-    <div class="column" v-html="html" />
+    <div class="column card" v-html="html" />
   </div>
 
   <div class="columns">
