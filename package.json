@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "server:nodemon": "npx nodemon src/server/index.ts",
-    "server": "npx ts-node src/server/index.ts"
+    "server": "npx ts-node src/server/index.ts",
+    "start": "npx ts-node src/server/index.ts"
   },
   "dependencies": {
     "@types/body-parser": "1.19",
