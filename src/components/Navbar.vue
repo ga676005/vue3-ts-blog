@@ -7,7 +7,10 @@ const usersStore = useUsers()
 const router = useRouter()
 
 async function logout() {
+  console.log('clicked!!!!!!!!!!!!')
   await usersStore.logout()
+  console.log('logout usersStore.currentUserId', usersStore.currentUserId)
+
   router.push({ path: '/' })
 }
 </script>
@@ -16,18 +19,26 @@ async function logout() {
   <div class="navbar">
     <div class="navbar-end">
       <div v-if="usersStore.currentUserId" class="buttons">
-        <RouterLink to="/posts/new" class="button">
+        <RouterLink
+          class="button"
+          data-testid="new-post"
+          to="/posts/new"
+        >
           New Post
         </RouterLink>
-        <button class="button" @click="logout">
+        <button
+          class="button"
+          data-testid="log-out"
+          @click="logout"
+        >
           Log Out
         </button>
       </div>
       <div v-else class="buttons">
-        <button class="button" @click="modal.showModal('signUp')">
+        <button id="sign-up" class="button" @click="modal.showModal('signUp')">
           Sign Up
         </button>
-        <button class="button" @click="modal.showModal('signIn')">
+        <button data-testid="sign-in" class="button" @click="modal.showModal('signIn')">
           Sign In
         </button>
       </div>

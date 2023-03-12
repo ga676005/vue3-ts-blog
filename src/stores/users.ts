@@ -23,19 +23,21 @@ export const useUsers = defineStore('users', {
   actions: {
     async authenticate() {
       try {
-        await delay()
         this.loading.authenticate = true
         const res = await window.fetch('/api/current-user', {
           headers: {
             'Content-Type': 'application/json',
           },
         })
+        // await delay()
 
         const result = await res.json()
         this.currentUserId = result.id
+        console.log('try this.currentUserId', this.currentUserId)
       }
       catch (err) {
         this.currentUserId = undefined
+        console.log('catch this.currentUserId', this.currentUserId)
       }
       finally {
         this.loading.authenticate = false

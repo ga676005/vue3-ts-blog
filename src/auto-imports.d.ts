@@ -2,12 +2,20 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const afterAll: typeof import('vitest')['afterAll']
+  const afterEach: typeof import('vitest')['afterEach']
+  const assert: typeof import('vitest')['assert']
+  const beforeAll: typeof import('vitest')['beforeAll']
+  const beforeEach: typeof import('vitest')['beforeEach']
+  const chai: typeof import('vitest')['chai']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
+  const describe: typeof import('vitest')['describe']
   const effectScope: typeof import('vue')['effectScope']
+  const expect: typeof import('vitest')['expect']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
@@ -16,6 +24,7 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const it: typeof import('vitest')['it']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
@@ -42,6 +51,8 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const suite: typeof import('vitest')['suite']
+  const test: typeof import('vitest')['test']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
@@ -54,6 +65,8 @@ declare global {
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
+  const vi: typeof import('vitest')['vi']
+  const vitest: typeof import('vitest')['vitest']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -64,12 +77,20 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly afterAll: UnwrapRef<typeof import('vitest')['afterAll']>
+    readonly afterEach: UnwrapRef<typeof import('vitest')['afterEach']>
+    readonly assert: UnwrapRef<typeof import('vitest')['assert']>
+    readonly beforeAll: UnwrapRef<typeof import('vitest')['beforeAll']>
+    readonly beforeEach: UnwrapRef<typeof import('vitest')['beforeEach']>
+    readonly chai: UnwrapRef<typeof import('vitest')['chai']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
+    readonly describe: UnwrapRef<typeof import('vitest')['describe']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly expect: UnwrapRef<typeof import('vitest')['expect']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -78,6 +99,7 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly it: UnwrapRef<typeof import('vitest')['it']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
@@ -104,6 +126,8 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly suite: UnwrapRef<typeof import('vitest')['suite']>
+    readonly test: UnwrapRef<typeof import('vitest')['test']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
@@ -116,6 +140,8 @@ declare module 'vue' {
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly vi: UnwrapRef<typeof import('vitest')['vi']>
+    readonly vitest: UnwrapRef<typeof import('vitest')['vitest']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
